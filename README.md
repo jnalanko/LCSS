@@ -1,3 +1,7 @@
+# About
+
+Computes the longest common substring of two strings.
+
 # Compiling
 
 ```
