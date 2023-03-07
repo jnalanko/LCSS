@@ -1,4 +1,4 @@
-# Compiling:
+# Compiling
 
 ```
 git submodule update --init
