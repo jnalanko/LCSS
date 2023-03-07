@@ -10,27 +10,6 @@ using namespace std;
 
 typedef long long LL;
 
-vector<int64_t> get_suffix_array(string& s){
-    int64_t n = s.size();
-    vector<int64_t> v(n);
-    for(int64_t i = 0; i < n; i++) v[i] = (int64_t) s[i];
-    for(int64_t L = 1; L <= n; L *= 2){
-        vector<pair<pair<int64_t,int64_t>, int64_t> > pairs(n);
-        for(int64_t i = 0; i < n; i++){
-            pairs[i] = {{v[i], (i + L < n) ? v[i+L] : -1}, i};
-        }
-        sort(pairs.begin(), pairs.end());
-        int64_t rank = 0;
-        for(int64_t i = 0; i < n; i++){
-            if(i > 0 && pairs[i].first != pairs[i-1].first) rank++;
-            v[pairs[i].second] = rank;
-        }
-    }
-    vector<int64_t> SA(n);
-    for(int64_t i = 0; i < n; i++) SA[v[i]] = i;
-    return SA;
-}
-
 // https://stackoverflow.com/questions/2602013/read-whole-ascii-file-into-c-stdstring
 string read_file(string filename){
     std::ifstream t(filename);
