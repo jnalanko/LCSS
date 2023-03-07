@@ -3,6 +3,7 @@
 #include <vector>
 #include <utility>
 #include <algorithm>
+#include <fstream>
 #include "divsufsort64.h"
 
 using namespace std;
@@ -31,9 +32,30 @@ vector<int64_t> get_suffix_array(string& s){
     return SA;
 }
 
+// https://stackoverflow.com/questions/2602013/read-whole-ascii-file-into-c-stdstring
+string read_file(string filename){
+    std::ifstream t(filename);
+    t.seekg(0, std::ios::end);
+    size_t size = t.tellg();
+    std::string buffer(size, ' ');
+    t.seekg(0);
+    t.read(&buffer[0], size); 
+    return buffer;
+}
+
 int main(int argc, char** argv){
-    string S = "mississippi";
-    string T = "asdaissipasda";
+
+    if(argc == 1){
+        cerr << "Usage: " << argv[0] << " example/file1.txt example/file2.txt" << endl << endl;
+        cerr << "Prints two lines. On the first line, three space-separated integers: the length of the longest match, starting position in file1.txt, starting position in file2.txt" << endl;
+        cerr << "On the next line, prints the longest match as a string" << endl;
+        return 1;
+    }
+
+    string S = read_file(argv[1]);
+    string T = read_file(argv[2]);
+    //string S = "mississippi";
+    //string T = "asdaissipasda";
     string ST = S + "$" + T + "#";
 
     int64_t n = ST.size();
@@ -65,7 +87,7 @@ int main(int argc, char** argv){
         }
         LCP[lex] = match_length;
     }
-    
+
     // Find the longest common match
     int64_t longest_match_length = -1;
     int64_t longest_match_S_location = -1;
@@ -80,9 +102,7 @@ int main(int argc, char** argv){
         }
     }
 
-    cout << longest_match_length << endl;
-    cout << longest_match_S_location << endl;
-    cout << longest_match_T_location << endl;
+    cout << longest_match_length << " " << longest_match_S_location << " " << longest_match_T_location << endl;
     cout << S.substr(longest_match_S_location, longest_match_length) << endl;
 
 }
