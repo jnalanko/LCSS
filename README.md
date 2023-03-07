@@ -1,0 +1,14 @@
+# Compiling:
+
+`
+make
+`
+
+# Running
+
+`
+./LCSS example/file1.txt example/file2.txt
+`
+
+Prints two lines. On the first line, three space-separated integers: the length of the longest match, starting position in file1.txt, starting position in file2.txt. On the next line, prints the longest match as a string.
+
