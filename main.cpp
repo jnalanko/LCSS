@@ -13,11 +13,15 @@ typedef long long LL;
 // https://stackoverflow.com/questions/2602013/read-whole-ascii-file-into-c-stdstring
 string read_file(string filename){
     std::ifstream t(filename);
+    if(!t.good()){
+        cerr << "Error opening file " << filename << endl;
+        exit(1);
+    }
     t.seekg(0, std::ios::end);
     size_t size = t.tellg();
     std::string buffer(size, ' ');
     t.seekg(0);
-    t.read(&buffer[0], size); 
+    t.read(&buffer[0], size);
     return buffer;
 }
 
