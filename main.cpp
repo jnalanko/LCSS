@@ -107,7 +107,11 @@ int main(int argc, char** argv){
         }
     }
 
-    if(longest_match_length == 0){
+    if(longest_match_length <= 0){
+        // -1 happens very rarely in the case where there are characters smaller than '$' and '#'
+        // in the inputs, and there is no match, and no two lexicographically adjacent suffixes start
+        // from different strings.
+        longest_match_length = 0;
         longest_match_S_location = 0;
         longest_match_T_location = 0;
     }
