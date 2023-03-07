@@ -80,6 +80,10 @@ int main(int argc, char** argv){
         }
     }
 
+    if(longest_match_length == 0){
+        longest_match_S_location = 0;
+        longest_match_T_location = 0;
+    }
     // Print the answer
     cout << longest_match_length << " " << longest_match_S_location << " " << longest_match_T_location << endl;
     cout << S.substr(longest_match_S_location, longest_match_length) << endl;
