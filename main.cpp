@@ -7,7 +7,6 @@
 #include "divsufsort64.h"
 
 using namespace std;
-// cmake -DCMAKE_BUILD_TYPE="Release" -DBUILD_DIVSUFSORT64=1 ..
 
 typedef long long LL;
 

@@ -1,6 +1,11 @@
 # Compiling:
 
 `
+cd libdivsufsort
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE="Release" -DBUILD_DIVSUFSORT64=1 ..
+cd ../..
 make
 `
 
