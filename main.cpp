@@ -53,8 +53,6 @@ int main(int argc, char** argv){
 
     string S = read_file(argv[1]);
     string T = read_file(argv[2]);
-    //string S = "mississippi";
-    //string T = "asdaissipasda";
     string ST = S + "$" + T + "#";
 
     int64_t n = ST.size();
@@ -63,11 +61,13 @@ int main(int argc, char** argv){
     vector<int64_t> SA(n);
     divsufsort64((sauchar_t*)(&ST[0]), SA.data(), ST.size());
 
+    // Compute the inverse suffix array
     vector<int64_t> ISA(n);
     for(int64_t i = 0; i < n; i++){
         ISA[SA[i]] = i;
     }
 
+    // Build the LCP array
     vector<int64_t> LCP(n);
 
     int64_t match_length = 0;
@@ -101,6 +101,7 @@ int main(int argc, char** argv){
         }
     }
 
+    // Print the answer
     cout << longest_match_length << " " << longest_match_S_location << " " << longest_match_T_location << endl;
     cout << S.substr(longest_match_S_location, longest_match_length) << endl;
 
