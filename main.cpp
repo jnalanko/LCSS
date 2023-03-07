@@ -21,6 +21,18 @@ string read_file(string filename){
     return buffer;
 }
 
+char FIRST_SEPARATOR = '$';
+char SECOND_SEPARATOR = '#';
+
+bool alphabet_contains_separators(const string& S){
+    for(char c : S){
+        if(c == FIRST_SEPARATOR || c == SECOND_SEPARATOR){
+            return true;
+        }
+    }
+    return false;
+}
+
 int main(int argc, char** argv){
 
     if(argc == 1){
@@ -32,6 +44,17 @@ int main(int argc, char** argv){
 
     string S = read_file(argv[1]);
     string T = read_file(argv[2]);
+
+    if(alphabet_contains_separators(S)){
+        cerr << "Error: first input file contains a separator character '$' or '#'" << endl;
+        return 1;
+    }
+
+    if(alphabet_contains_separators(T)){
+        cerr << "Error: second input file contains a separator character '$' or '#'" << endl;
+        return 1;
+    }
+
     string ST = S + "$" + T + "#";
 
     int64_t n = ST.size();
